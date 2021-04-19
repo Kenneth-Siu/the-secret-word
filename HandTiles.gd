@@ -3,6 +3,7 @@ extends ReferenceRect
 var ALPHABET = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P",
 "Q","R","S","T","U","V","W","X","Y","Z"]
 var MAX_HAND_SIZE = 10
+var SCRAMBLE_NUMBER_OF_TILES = 3
 
 var Tile = preload("res://Tile.tscn")
 var hand = []
@@ -42,7 +43,6 @@ func _on_TileButton_pressed(tile):
 	remove_child(tile)
 	$"../PlayArea/PlayedTiles".add_tile_as_child(tile)
 
-
 func _on_ConfirmButton_pressed():
 	hand = get_children()
 	_fill_hand()
@@ -51,3 +51,12 @@ func _on_ConfirmButton_pressed():
 func _reset_all_tile_positions():
 	for child in get_children():
 		_reset_tile_position(child)
+
+func _on_ScrambleButton_pressed():
+	$"../PlayArea/PlayedTiles".return_tiles_to_hand()
+	for i in range(SCRAMBLE_NUMBER_OF_TILES):
+		var tile_to_remove = hand[randi() % (hand.size() - 1)]
+		hand.erase(tile_to_remove)
+		tile_to_remove.queue_free()
+	_fill_hand()
+	_reset_all_tile_positions()

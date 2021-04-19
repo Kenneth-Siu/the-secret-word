@@ -12,6 +12,12 @@ func add_tile_as_child(tile):
 	_align_children_to_center()
 	_check_is_word()
 
+func return_tiles_to_hand():
+	for child in get_children():
+		child.get_node("Button").disconnect("pressed", self, "_on_TileButton_pressed")
+		remove_child(child)
+		$"../../HandTiles".add_tile_as_child(child)
+
 func _align_children_to_center():
 	if get_child_count() == 0:
 		return
