@@ -51,11 +51,11 @@ margin_top = 64.0
 margin_bottom = 128.0
 rect_scale = Vector2( 0.75, 0.75 )
 disabled = true
+enabled_focus_mode = 0
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 5 )
 texture_disabled = ExtResource( 4 )
-texture_focused = ExtResource( 5 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -71,3 +71,5 @@ size_flags_stretch_ratio = 0.0
 script = ExtResource( 1 )
 [connection signal="valid_word_deformed" from="Box/PlayArea/PlayedTiles" to="Box/PlayArea/ConfirmButton" method="_on_PlayedTiles_valid_word_deformed"]
 [connection signal="valid_word_formed" from="Box/PlayArea/PlayedTiles" to="Box/PlayArea/ConfirmButton" method="_on_PlayedTiles_valid_word_formed"]
+[connection signal="pressed" from="Box/PlayArea/ConfirmButton" to="Box/HandTiles" method="_on_ConfirmButton_pressed"]
+[connection signal="pressed" from="Box/PlayArea/ConfirmButton" to="Box/PlayArea/PlayedTiles" method="_on_ConfirmButton_pressed"]

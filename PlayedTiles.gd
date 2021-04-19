@@ -13,9 +13,9 @@ func add_tile_as_child(tile):
 	_check_is_word()
 
 func _align_children_to_center():
-	var children = get_children()
-	if children.size() == 0:
+	if get_child_count() == 0:
 		return
+	var children = get_children()
 	var child_width = get_child(0).get_size().x
 	var starting_x = -(children.size() * child_width) / 2
 	for i in range(children.size()):
@@ -47,3 +47,9 @@ func _check_is_word():
 	elif !valid and valid_word:
 		valid_word = false
 		emit_signal("valid_word_deformed")
+
+func _on_ConfirmButton_pressed():
+	for child in get_children():
+		child.queue_free()
+	valid_word = false
+	emit_signal("valid_word_deformed")
