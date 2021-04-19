@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://HandTiles.gd" type="Script" id=1]
+[ext_resource path="res://Fight.gd" type="Script" id=2]
+[ext_resource path="res://PlayedTiles.gd" type="Script" id=3]
+[ext_resource path="res://submit_button_disabled.png" type="Texture" id=4]
+[ext_resource path="res://submit_button.png" type="Texture" id=5]
+[ext_resource path="res://ConfirmButton.gd" type="Script" id=6]
+
+[node name="Fight" type="ReferenceRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -320.0
+margin_right = 320.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayArea" type="ReferenceRect" parent="Box"]
+margin_right = 640.0
+margin_bottom = 532.0
+size_flags_vertical = 3
+
+[node name="PlayedTiles" type="ReferenceRect" parent="Box/PlayArea"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -32.0
+margin_bottom = 32.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmButton" type="TextureButton" parent="Box/PlayArea"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -225.0
+margin_top = 64.0
+margin_bottom = 128.0
+rect_scale = Vector2( 0.75, 0.75 )
+disabled = true
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 4 )
+texture_focused = ExtResource( 5 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandTiles" type="ReferenceRect" parent="Box"]
+margin_top = 536.0
+margin_right = 640.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 64 )
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.0
+script = ExtResource( 1 )
+[connection signal="valid_word_deformed" from="Box/PlayArea/PlayedTiles" to="Box/PlayArea/ConfirmButton" method="_on_PlayedTiles_valid_word_deformed"]
+[connection signal="valid_word_formed" from="Box/PlayArea/PlayedTiles" to="Box/PlayArea/ConfirmButton" method="_on_PlayedTiles_valid_word_formed"]
