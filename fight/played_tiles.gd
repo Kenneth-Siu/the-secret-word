@@ -4,7 +4,6 @@ signal valid_word_formed
 signal valid_word_deformed
 
 var valid_word = false
-onready var words_dictionary = get_node("/root/WordsDictionary")
 
 func add_tile_as_child(tile):
 	add_child(tile)
@@ -46,7 +45,7 @@ func _check_is_word():
 	var word = ""
 	for child in get_children():
 		word += child.get_node("Letter").text.to_lower()
-	var valid = get_child_count() > 2 and words_dictionary.is_word(word)
+	var valid = get_child_count() > 2 and WordsDictionary.is_word(word)
 	if valid and !valid_word:
 		valid_word = true
 		emit_signal("valid_word_formed")

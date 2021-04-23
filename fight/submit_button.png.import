@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/the_secret_word_logo.png-e846ac8e6624411c39cc8df5769c7f98.stex"
+path="res://.import/submit_button.png-b777f8e431727732dbe8e00755284e07.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://the_secret_word_logo.png"
-dest_files=[ "res://.import/the_secret_word_logo.png-e846ac8e6624411c39cc8df5769c7f98.stex" ]
+source_file="res://fight/submit_button.png"
+dest_files=[ "res://.import/submit_button.png-b777f8e431727732dbe8e00755284e07.stex" ]
 
 [params]
 

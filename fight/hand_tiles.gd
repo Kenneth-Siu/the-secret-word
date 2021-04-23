@@ -5,7 +5,7 @@ var ALPHABET = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P",
 var MAX_HAND_SIZE = 10
 var SCRAMBLE_NUMBER_OF_TILES = 3
 
-var Tile = preload("res://Tile.tscn")
+var Tile = preload("res://tile/tile.tscn")
 var hand = []
 
 func init_new_hand():

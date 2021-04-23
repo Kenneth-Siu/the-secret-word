@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/scramble_button_disabled.png-675cd7952a5756f770402b842fa75fe7.stex"
+path="res://.import/scramble_button_disabled.png-75f600cb5fdbb1a0511481601582dcd9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scramble_button_disabled.png"
-dest_files=[ "res://.import/scramble_button_disabled.png-675cd7952a5756f770402b842fa75fe7.stex" ]
+source_file="res://fight/scramble_button_disabled.png"
+dest_files=[ "res://.import/scramble_button_disabled.png-75f600cb5fdbb1a0511481601582dcd9.stex" ]
 
 [params]
 

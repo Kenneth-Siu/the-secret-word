@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Reference",
+"class": "_Card",
+"language": "GDScript",
+"path": "res://cards/card.gd"
+} ]
 _global_script_class_icons={
-
+"_Card": ""
 }
 
 [application]
@@ -20,7 +25,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-WordsDictionary="*res://WordsDictionary.gd"
+WordsDictionary="*res://singletons/words_dictionary.gd"
 
 [rendering]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://the_secret_word_logo.png" type="Texture" id=1]
+[ext_resource path="res://main_menu/the_secret_word_logo.png" type="Texture" id=1]
 
 [node name="MainMenu" type="CenterContainer"]
 anchor_right = 1.0
@@ -32,6 +32,7 @@ margin_left = 262.0
 margin_right = 331.0
 margin_bottom = 20.0
 size_flags_horizontal = 4
+disabled = true
 text = "Continue"
 
 [node name="NewGameButton" type="Button" parent="VBoxContainer/VBoxContainer"]
@@ -48,6 +49,7 @@ margin_top = 70.0
 margin_right = 328.0
 margin_bottom = 90.0
 size_flags_horizontal = 4
+disabled = true
 text = "Options"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer/VBoxContainer"]

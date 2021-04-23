@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/submit_button.png-d5d291effe581d998e527e8d2f03a924.stex"
+path="res://.import/scramble_button.png-a40726a0290460fa5f0202e3fdae90d9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://submit_button.png"
-dest_files=[ "res://.import/submit_button.png-d5d291effe581d998e527e8d2f03a924.stex" ]
+source_file="res://fight/scramble_button.png"
+dest_files=[ "res://.import/scramble_button.png-a40726a0290460fa5f0202e3fdae90d9.stex" ]
 
 [params]
 

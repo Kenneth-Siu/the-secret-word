@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TileBackground.png-10992d1098e0c02d6271b63a3fbde08a.stex"
+path="res://.import/submit_button_disabled.png-b356f2751bfd80bbc68c7d5fdfe134dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TileBackground.png"
-dest_files=[ "res://.import/TileBackground.png-10992d1098e0c02d6271b63a3fbde08a.stex" ]
+source_file="res://fight/submit_button_disabled.png"
+dest_files=[ "res://.import/submit_button_disabled.png-b356f2751bfd80bbc68c7d5fdfe134dd.stex" ]
 
 [params]
 
