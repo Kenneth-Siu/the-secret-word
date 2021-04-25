@@ -17,6 +17,8 @@ func _ready():
 		deck.append(CommonCard.new())
 	for _i in range(4):
 		deck.append(UncommonCard.new())
+	for _i in range(2):
+		deck.append(RareCard.new())
 	deck.append(LegendaryCard.new())
 
 func start_fight():

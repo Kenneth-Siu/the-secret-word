@@ -12,6 +12,19 @@ func init(new_card: Card, new_encounter_scene: Node, new_hand_area: Node, new_st
 	encounter_scene = new_encounter_scene
 	hand_area = new_hand_area
 	staging_area = new_staging_area
+	TextureRect
+	match card.get_rarity():
+		Card.RARITY.BASIC:
+			$RaritySymbol.modulate = Color("#ffffff")
+		Card.RARITY.COMMON:
+			$RaritySymbol.modulate = Color("#606aff")
+		Card.RARITY.UNCOMMON:
+			$RaritySymbol.modulate = Color("#72ed71")
+		Card.RARITY.RARE:
+			$RaritySymbol.modulate = Color("#dc60ff")
+		Card.RARITY.LEGENDARY:
+			$RaritySymbol.modulate = Color("#ffdb39")
+	
 	encounter_scene.connect("rerender_tiles", self, "redraw")
 
 func redraw():
