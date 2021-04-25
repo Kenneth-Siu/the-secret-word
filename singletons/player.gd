@@ -1,16 +1,21 @@
 extends Node
 
+signal player_died
+
 var MAX_HAND_SIZE = 10
 var SCRAMBLE_NUMBER_OF_TILES = 4
 
 var deck: Array = []
+var max_health: int
 
 var draw_pile: Array = []
 var discard_pile: Array = []
 var hand: Array = []
 var staging_area: Array = []
+var health: int
 
-func _ready():
+func init():
+	deck.clear()
 	for _i in range(8):
 		deck.append(BasicCard.new())
 	for _i in range(6):
@@ -20,6 +25,8 @@ func _ready():
 	for _i in range(2):
 		deck.append(RareCard.new())
 	deck.append(LegendaryCard.new())
+	max_health = 60
+	health = max_health
 
 func start_fight():
 	discard_pile.clear()
@@ -75,3 +82,14 @@ func get_staged_word() -> String:
 	for card in staging_area:
 		word += card.current_letter.to_lower()
 	return word
+
+func take_damage(damage_amount: int):
+	if damage_amount > health:
+		health = 0
+	else:
+		health -= damage_amount
+	if health == 0:
+		kill_player()
+
+func kill_player():
+	emit_signal("player_died")

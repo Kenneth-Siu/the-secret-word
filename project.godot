@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://cards/common_card.gd"
 }, {
+"base": "ReferenceRect",
+"class": "EncounterScene",
+"language": "GDScript",
+"path": "res://encounter/encounter.gd"
+}, {
+"base": "ReferenceRect",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://enemies/enemy.gd"
+}, {
 "base": "Card",
 "class": "LegendaryCard",
 "language": "GDScript",
@@ -48,6 +58,8 @@ _global_script_class_icons={
 "BasicCard": "",
 "Card": "",
 "CommonCard": "",
+"EncounterScene": "",
+"Enemy": "",
 "LegendaryCard": "",
 "RareCard": "",
 "Tile": "",
@@ -57,12 +69,14 @@ _global_script_class_icons={
 [application]
 
 config/name="The Secret Word"
+run/main_scene="res://main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 WordsDictionary="*res://singletons/words_dictionary.gd"
 Player="*res://singletons/player.gd"
+Narrator="*res://singletons/narrator.gd"
 
 [debug]
 
