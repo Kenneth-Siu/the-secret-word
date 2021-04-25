@@ -18,6 +18,9 @@ func get_rarity():
 func get_letters():
 	pass
 
+func get_damage():
+	pass
+
 func randomise_current_letter():
 	var letters = get_letters()
 	current_letter = letters[randi() % (letters.size() - 1)]

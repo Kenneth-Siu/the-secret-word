@@ -4,6 +4,7 @@ signal player_died
 
 var MAX_HAND_SIZE = 10
 var SCRAMBLE_NUMBER_OF_TILES = 4
+var MIN_WORD_LENGTH = 3
 
 var deck: Array = []
 var max_health: int
@@ -17,14 +18,14 @@ var health: int
 func init():
 	deck.clear()
 	for _i in range(8):
-		deck.append(BasicCard.new())
+		deck.append(Punch.new())
 	for _i in range(6):
-		deck.append(CommonCard.new())
+		deck.append(Kick.new())
 	for _i in range(4):
-		deck.append(UncommonCard.new())
+		deck.append(Tackle.new())
 	for _i in range(2):
-		deck.append(RareCard.new())
-	deck.append(LegendaryCard.new())
+		deck.append(Choke.new())
+	deck.append(Suplex.new())
 	max_health = 60
 	health = max_health
 
@@ -77,11 +78,21 @@ func discard_staged_cards():
 		discard_pile.append(card)
 	staging_area.clear()
 
+func is_staged_word_valid() -> bool:
+	var word = get_staged_word()
+	return word.length() >= MIN_WORD_LENGTH and WordsDictionary.is_word(word)
+
 func get_staged_word() -> String:
 	var word: String = ""
 	for card in staging_area:
 		word += card.current_letter.to_lower()
 	return word
+
+func get_staged_damage() -> int:
+	var damage: int = 0
+	for card in staging_area:
+		damage += card.get_damage()
+	return damage
 
 func take_damage(damage_amount: int):
 	if damage_amount > health:

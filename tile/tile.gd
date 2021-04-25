@@ -25,7 +25,7 @@ func init(new_card: Card, new_encounter_scene: Node, new_hand_area: Node, new_st
 		Card.RARITY.LEGENDARY:
 			$RaritySymbol.modulate = Color("#ffdb39")
 	
-	encounter_scene.connect("rerender_tiles", self, "redraw")
+	encounter_scene.connect("rerender_encounter", self, "redraw")
 
 func redraw():
 	$Letter.text = card.current_letter

@@ -1,7 +1,7 @@
 extends TextureButton
 
-func enable_submit_button():
-	self.disabled = false
-
-func disable_submit_button():
-	self.disabled = true
+func update_state():
+	if Player.is_staged_word_valid():
+		self.disabled = false
+	else:
+		self.disabled = true
