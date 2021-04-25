@@ -1,17 +1,23 @@
 extends Reference
 
-class_name _Card
+class_name Card
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+enum RARITY {
+	BASIC,
+	COMMON,
+	UNCOMMON,
+	RARE,
+	LEGENDARY
+}
 
+var current_letter: String
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func get_rarity():
+	pass
 
+func get_letters():
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func randomise_current_letter():
+	var letters = get_letters()
+	current_letter = letters[randi() % (letters.size() - 1)]

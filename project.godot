@@ -9,13 +9,49 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Card",
+"class": "BasicCard",
+"language": "GDScript",
+"path": "res://cards/basic_card.gd"
+}, {
 "base": "Reference",
-"class": "_Card",
+"class": "Card",
 "language": "GDScript",
 "path": "res://cards/card.gd"
+}, {
+"base": "Card",
+"class": "CommonCard",
+"language": "GDScript",
+"path": "res://cards/common_card.gd"
+}, {
+"base": "Card",
+"class": "LegendaryCard",
+"language": "GDScript",
+"path": "res://cards/legendary_card.gd"
+}, {
+"base": "Card",
+"class": "RareCard",
+"language": "GDScript",
+"path": "res://cards/rare_card.gd"
+}, {
+"base": "ReferenceRect",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://tile/tile.gd"
+}, {
+"base": "Card",
+"class": "UncommonCard",
+"language": "GDScript",
+"path": "res://cards/uncommon_card.gd"
 } ]
 _global_script_class_icons={
-"_Card": ""
+"BasicCard": "",
+"Card": "",
+"CommonCard": "",
+"LegendaryCard": "",
+"RareCard": "",
+"Tile": "",
+"UncommonCard": ""
 }
 
 [application]
@@ -26,6 +62,11 @@ config/icon="res://icon.png"
 [autoload]
 
 WordsDictionary="*res://singletons/words_dictionary.gd"
+Player="*res://singletons/player.gd"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
 
 [rendering]
 
