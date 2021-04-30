@@ -18,6 +18,9 @@ func get_rarity():
 func get_letters():
 	pass
 
+func get_trust():
+	pass
+
 func get_damage():
 	pass
 

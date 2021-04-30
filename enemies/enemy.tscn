@@ -1,15 +1,39 @@
 [gd_scene format=2]
 
 [node name="Enemy" type="ReferenceRect"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Portrait" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TrustLabel" type="Label" parent="."]
+margin_bottom = 14.0
+grow_horizontal = 2
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SuspicionLabel" type="Label" parent="."]
+margin_top = 14.0
+margin_bottom = 28.0
+grow_horizontal = 2
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_bottom = 14.0
+grow_horizontal = 2
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

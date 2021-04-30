@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://enemies/enemy.gd"
 }, {
+"base": "Reference",
+"class": "EnemyAction",
+"language": "GDScript",
+"path": "res://enemies/enemy_action.gd"
+}, {
 "base": "CommonCard",
 "class": "Kick",
 "language": "GDScript",
@@ -48,6 +53,11 @@ _global_script_classes=[ {
 "class": "LegendaryCard",
 "language": "GDScript",
 "path": "res://cards/legendary_card.gd"
+}, {
+"base": "Reference",
+"class": "PlayerAction",
+"language": "GDScript",
+"path": "res://player/player_action.gd"
 }, {
 "base": "BasicCard",
 "class": "Punch",
@@ -86,8 +96,10 @@ _global_script_class_icons={
 "CommonCard": "",
 "EncounterScene": "",
 "Enemy": "",
+"EnemyAction": "",
 "Kick": "",
 "LegendaryCard": "",
+"PlayerAction": "",
 "Punch": "",
 "RareCard": "",
 "Suplex": "",

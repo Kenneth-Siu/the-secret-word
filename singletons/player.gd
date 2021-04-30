@@ -1,5 +1,6 @@
 extends Node
 
+signal player_health_changed
 signal player_died
 
 var MAX_HAND_SIZE = 10
@@ -16,6 +17,11 @@ var staging_area: Array = []
 var health: int
 
 func init():
+	load_deck()
+	max_health = 60
+	health = max_health
+
+func load_deck():
 	deck.clear()
 	for _i in range(8):
 		deck.append(Punch.new())
@@ -26,8 +32,6 @@ func init():
 	for _i in range(2):
 		deck.append(Choke.new())
 	deck.append(Suplex.new())
-	max_health = 60
-	health = max_health
 
 func start_fight():
 	discard_pile.clear()
@@ -88,19 +92,22 @@ func get_staged_word() -> String:
 		word += card.current_letter.to_lower()
 	return word
 
-func get_staged_damage() -> int:
-	var damage: int = 0
+func get_staged_action() -> PlayerAction:
+	var action = PlayerAction.new()
 	for card in staging_area:
-		damage += card.get_damage()
-	return damage
+		action.non_hostile.gain_trust += card.get_trust()
+		action.hostile.deal_damage += card.get_damage()
+	return action
 
 func take_damage(damage_amount: int):
 	if damage_amount > health:
 		health = 0
 	else:
 		health -= damage_amount
+	if damage_amount > 0:
+		emit_signal("player_health_changed")
 	if health == 0:
-		kill_player()
+		die()
 
-func kill_player():
+func die():
 	emit_signal("player_died")
