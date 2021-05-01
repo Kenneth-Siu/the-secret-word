@@ -1,6 +1,9 @@
 extends Node
 
+signal tiles_moved_zone
+signal player_action_complete
 signal player_health_changed
+signal player_effects_changed
 signal player_died
 
 var MAX_HAND_SIZE = 10
@@ -15,6 +18,8 @@ var discard_pile: Array = []
 var hand: Array = []
 var staging_area: Array = []
 var health: int
+
+var effects: PlayerEffects = PlayerEffects.new()
 
 func init():
 	load_deck()
@@ -39,14 +44,14 @@ func start_fight():
 	staging_area.clear()
 	draw_pile = deck.duplicate()
 	draw_pile.shuffle()
-	draw_to_full()
+	start_turn()
 
-func scramble():
+func take_scramble_action():
 	for _i in range(SCRAMBLE_NUMBER_OF_TILES):
 		discard_card_from_hand(randi() % (hand.size() - 1))
-	draw_to_full()
+	emit_signal("player_action_complete")
 
-func draw_to_full():
+func start_turn():
 	if hand.size() < MAX_HAND_SIZE:
 		for _i in range(MAX_HAND_SIZE - hand.size()):
 			draw_card()
@@ -61,19 +66,23 @@ func draw_card():
 	var card = draw_pile.pop_back()
 	hand.append(card)
 	card.randomise_current_letter()
+	emit_signal("tiles_moved_zone")
 
 func discard_card_from_hand(index: int):
 	var card = hand[index]
 	hand.remove(index)
 	discard_pile.append(card)
+	emit_signal("tiles_moved_zone")
 
 func stage_card(card: Card):
 	if (!hand.has(card)):
 		push_error("Can't stage card not in hand.")
 	staging_area.append(card)
+	emit_signal("tiles_moved_zone")
 
 func unstage_card(card: Card):
 	staging_area.remove(staging_area.find(card))
+	emit_signal("tiles_moved_zone")
 
 func discard_staged_cards():
 	for card in staging_area:
@@ -81,6 +90,7 @@ func discard_staged_cards():
 		hand.remove(hand_index)
 		discard_pile.append(card)
 	staging_area.clear()
+	emit_signal("tiles_moved_zone")
 
 func is_staged_word_valid() -> bool:
 	var word = get_staged_word()
@@ -97,6 +107,8 @@ func get_staged_action() -> PlayerAction:
 	for card in staging_area:
 		action.non_hostile.gain_trust += card.get_trust()
 		action.hostile.deal_damage += card.get_damage()
+	if effects.sneak_attack > 0.0:
+		action.hostile.deal_damage = int(action.hostile.deal_damage * effects.sneak_attack)
 	return action
 
 func take_damage(damage_amount: int):
@@ -111,3 +123,13 @@ func take_damage(damage_amount: int):
 
 func die():
 	emit_signal("player_died")
+
+func gain_sneak_attack_bonus(enemy_trust: int):
+	var bonus = enemy_trust / 5.0
+	if bonus > 1.0:
+		effects.sneak_attack = bonus
+		emit_signal("player_effects_changed")
+
+func clear_sneak_attack():
+	effects.sneak_attack = 0.0
+	emit_signal("player_effects_changed")

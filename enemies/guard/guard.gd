@@ -1,6 +1,6 @@
 extends Enemy
 
-func _init().(30, 1, 20):
+func _init().(30, 2, 20):
 	set_portrait()
 
 func set_portrait():
