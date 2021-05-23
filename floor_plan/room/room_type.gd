@@ -1,0 +1,13 @@
+extends Node
+
+class_name ROOM_TYPE
+
+enum {
+	OFFICE,
+	LABORATORY,
+	BREAK_ROOM,
+	BATHROOM,
+	CAMERA_ROOM,
+	VAULT,
+	EXECUTIVES_OFFICE,
+}

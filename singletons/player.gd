@@ -1,6 +1,9 @@
 extends Node
 
+signal player_staging_area_changed
 signal tiles_moved_zone
+signal player_dealt_enemy_damage
+signal player_gained_trust_with_enemy
 signal player_action_complete
 signal player_health_changed
 signal player_effects_changed
@@ -39,16 +42,26 @@ func load_deck():
 	deck.append(Suplex.new())
 
 func start_fight():
+	draw_pile = deck.duplicate()
+	draw_pile.shuffle()
 	discard_pile.clear()
 	hand.clear()
 	staging_area.clear()
-	draw_pile = deck.duplicate()
-	draw_pile.shuffle()
+	effects = PlayerEffects.new()
 	start_turn()
 
 func take_scramble_action():
 	for _i in range(SCRAMBLE_NUMBER_OF_TILES):
 		discard_card_from_hand(randi() % (hand.size() - 1))
+	emit_signal("player_action_complete")
+
+func take_action(is_hostile: bool):
+	if !is_hostile:
+		emit_signal("player_gained_trust_with_enemy", get_staged_action().non_hostile.gain_trust)
+	else:
+		emit_signal("player_dealt_enemy_damage", get_staged_action().hostile.deal_damage)
+		clear_sneak_attack()
+	discard_staged_cards()
 	emit_signal("player_action_complete")
 
 func start_turn():
@@ -78,11 +91,20 @@ func stage_card(card: Card):
 	if (!hand.has(card)):
 		push_error("Can't stage card not in hand.")
 	staging_area.append(card)
+	emit_signal("player_staging_area_changed")
 	emit_signal("tiles_moved_zone")
 
 func unstage_card(card: Card):
 	staging_area.remove(staging_area.find(card))
+	emit_signal("player_staging_area_changed")
 	emit_signal("tiles_moved_zone")
+	
+func unstage_card_and_subsequent_cards(card: Card):
+	var card_index = staging_area.find(card)
+	var num_of_staged_cards = staging_area.size()
+	var cards_to_unstage = staging_area.slice(card_index, num_of_staged_cards - 1)
+	for card in cards_to_unstage:
+		unstage_card(card)
 
 func discard_staged_cards():
 	for card in staging_area:
@@ -90,6 +112,7 @@ func discard_staged_cards():
 		hand.remove(hand_index)
 		discard_pile.append(card)
 	staging_area.clear()
+	emit_signal("player_staging_area_changed")
 	emit_signal("tiles_moved_zone")
 
 func is_staged_word_valid() -> bool:
@@ -131,5 +154,6 @@ func gain_sneak_attack_bonus(enemy_trust: int):
 		emit_signal("player_effects_changed")
 
 func clear_sneak_attack():
-	effects.sneak_attack = 0.0
-	emit_signal("player_effects_changed")
+	if effects.sneak_attack != 0.0:
+		effects.sneak_attack = 0.0
+		emit_signal("player_effects_changed")

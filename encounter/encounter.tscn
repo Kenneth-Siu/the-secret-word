@@ -137,6 +137,5 @@ margin_left = 410.0
 margin_top = 21.0
 margin_right = 410.0
 margin_bottom = 35.0
-[connection signal="pressed" from="ScrambleButton" to="." method="scramble"]
 [connection signal="pressed" from="ScrambleButton" to="ScrambleButton" method="pressed"]
-[connection signal="pressed" from="SubmitButton" to="." method="submit_word"]
+[connection signal="pressed" from="SubmitButton" to="." method="submit_button_pressed"]

@@ -3,13 +3,11 @@ extends ReferenceRect
 class_name Tile
 
 var card: Card
-var encounter_scene: Node
 var hand_area: Node
 var staging_area: Node
 
-func init(new_card: Card, new_encounter_scene: Node, new_hand_area: Node, new_staging_area: Node):
+func init(new_card: Card, new_hand_area: Node, new_staging_area: Node):
 	card = new_card
-	encounter_scene = new_encounter_scene
 	hand_area = new_hand_area
 	staging_area = new_staging_area
 	match card.get_rarity():
@@ -23,6 +21,7 @@ func init(new_card: Card, new_encounter_scene: Node, new_hand_area: Node, new_st
 			$RaritySymbol.modulate = Color("#dc60ff")
 		Card.RARITY.LEGENDARY:
 			$RaritySymbol.modulate = Color("#ffdb39")
+	redraw()
 
 func redraw():
 	$Letter.text = card.current_letter
@@ -46,10 +45,10 @@ func move_to_staging_area():
 	anchor_right = 0.5
 	margin_left = index * width + starting_x
 	set_size(original_size)
-	if $Button.is_connected("pressed", encounter_scene, "stage_tile"):
-		$Button.disconnect("pressed", encounter_scene, "stage_tile")
-	if !$Button.is_connected("pressed", encounter_scene, "unstage_tile_and_subsequent_tiles"):
-		$Button.connect("pressed", encounter_scene, "unstage_tile_and_subsequent_tiles", [self])
+	if $Button.is_connected("pressed", Player, "stage_card"):
+		$Button.disconnect("pressed", Player, "stage_card")
+	if !$Button.is_connected("pressed", Player, "unstage_card_and_subsequent_cards"):
+		$Button.connect("pressed", Player, "unstage_card_and_subsequent_cards", [card])
 
 func move_to_hand_area():
 	if get_parent() != hand_area:
@@ -63,10 +62,10 @@ func move_to_hand_area():
 	anchor_right = 0
 	margin_left = index * width
 	set_size(original_size)
-	if $Button.is_connected("pressed", encounter_scene, "unstage_tile_and_subsequent_tiles"):
-		$Button.disconnect("pressed", encounter_scene, "unstage_tile_and_subsequent_tiles")
-	if !$Button.is_connected("pressed", encounter_scene, "stage_tile"):
-		$Button.connect("pressed", encounter_scene, "stage_tile", [self])
+	if $Button.is_connected("pressed", Player, "unstage_card_and_subsequent_cards"):
+		$Button.disconnect("pressed", Player, "unstage_card_and_subsequent_cards")
+	if !$Button.is_connected("pressed", Player, "stage_card"):
+		$Button.connect("pressed", Player, "stage_card", [card])
 
 func discard():
 	if get_parent() != null:

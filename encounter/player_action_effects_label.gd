@@ -1,6 +1,6 @@
 extends Label
 
-func update_state():
+func update():
 	var new_text = ""
 	var player_action = Player.get_staged_action()
 	if !$"../../../../Encounter".is_hostile:

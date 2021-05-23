@@ -11,5 +11,5 @@ func get_action() -> EnemyAction:
 	if !is_hostile:
 		action.gain_suspicion = 1
 	else:
-		action.deal_damage = 3
+		action.deal_damage = 20
 	return action
